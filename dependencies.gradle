@@ -36,9 +36,9 @@
 
 elytraModpackVersion {
     // 在这配置的gtnh版本 用于自动拉取依赖版本
-    gtnhVersion = "daily"
+    gtnhVersion = "2.9.0-beta-2"
     // 是否不缓存拉取的依赖清单文件
-    manifestNoCache = true
+    manifestNoCache = false
     // 是否自动为输出的jar添加 `gtnhVersion` 后缀
     attachManifestVersionToJar = true
 }
@@ -55,18 +55,20 @@ dependencies {
     implementation(gtnh("MagicBees"))
     implementation(gtnh("ThaumicEnergistics"))
     implementation(gtnh("Botania"))
-    implementation(gtnh("supersolarpanels"))
-    implementation(gtnh("Electro-Magic-Tools"))
+    // implementation(gtnh("supersolarpanels")) // shit
+    // implementation(gtnh("Electro-Magic-Tools")) // shit
     implementation(gtnh("Hodgepodge"))
-    implementation(gtnh("WitcheryExtras"))
+    // implementation(gtnh("WitcheryExtras"))
     implementation(gtnh("BloodMagic"))
     implementation(gtnh("EnderIO"))
     implementation(gtnh("EnderCore"))
     implementation(gtnh("Galaxy-Space-GTNH"))
     implementation(gtnh("ForestryMC"))
-    compileOnly(deobfCurse('witchery-69673:2234410'))
+    // compileOnly(gtnh("witchery"))
     compileOnly(gtnh("amunra"))
-    compileOnly(gtnh("twilightforest"))}
+    compileOnly(gtnh("twilightforest"))
+    runtimeOnlyNonPublishable(files("libs/worldedit-v0.0.9-dev.jar"))
+}
 
 String gtnh(String name, String classifier = "dev") {
     // com.github.GTNewHorizons:{name}:{version of name}:{classifier}

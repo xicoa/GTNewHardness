@@ -1,4 +1,4 @@
-package com.myname.mymodid;
+package com.xicoa.gtnewhardness;
 
 public class ClientProxy extends CommonProxy {
 

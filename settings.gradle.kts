@@ -11,12 +11,25 @@ pluginManagement {
             }
         }
         gradlePluginPortal()
+        maven {
+            name = "Aliyun Maven Public"
+            url = uri("https://maven.aliyun.com/repository/public/")
+        }
         mavenCentral()
         mavenLocal()
         maven {
             name = "JitPack"
 			url = uri("https://jitpack.io")
 		}
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        maven {
+            name = "Aliyun Maven Public"
+            url = uri("https://maven.aliyun.com/repository/public/")
+        }
     }
 }
 

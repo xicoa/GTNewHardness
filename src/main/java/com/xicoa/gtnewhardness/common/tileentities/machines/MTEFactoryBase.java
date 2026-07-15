@@ -1,4 +1,4 @@
-package com.myname.mymodid.common.tileentities.machines;
+package com.xicoa.gtnewhardness.common.tileentities.machines;
 
 // public class MTEFactoryBase extends MTEMultiBlockBase {
 

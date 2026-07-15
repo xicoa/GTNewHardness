@@ -1,7 +1,9 @@
-package com.myname.mymodid;
+package com.xicoa.gtnewhardness;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.xicoa.gtnewhardness.loaders.MaterialLoader;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -9,15 +11,25 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import gregtech.api.GregTechAPI;
 
-@Mod(modid = MyMod.MODID, version = Tags.VERSION, name = "MyMod", acceptedMinecraftVersions = "[1.7.10]")
-public class MyMod {
+@Mod(
+    modid = GTNewHardness.MODID,
+    version = Tags.VERSION,
+    name = "GTNewHardness",
+    acceptedMinecraftVersions = "[1.7.10]",
+    dependencies = "required-after:gregtech")
+public class GTNewHardness {
 
-    public static final String MODID = "mymodid";
+    public static final String MODID = "gtnewhardness";
     public static final Logger LOG = LogManager.getLogger(MODID);
 
-    @SidedProxy(clientSide = "com.myname.mymodid.ClientProxy", serverSide = "com.myname.mymodid.CommonProxy")
+    @SidedProxy(clientSide = "com.xicoa.gtnewhardness.ClientProxy", serverSide = "com.xicoa.gtnewhardness.CommonProxy")
     public static CommonProxy proxy;
+
+    public GTNewHardness() {
+        GregTechAPI.sBeforeGTPreload.add(MaterialLoader::load);
+    }
 
     @Mod.EventHandler
     // preInit "Run before anything else. Read your config, create blocks, items, etc, and register them with the
