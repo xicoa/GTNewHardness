@@ -17,7 +17,7 @@ public class AcidGeneratorRecipe {
         GTValues.RA.stdBuilder()
             .itemInputs(GTOreDictUnificator.get(OrePrefixes.cellPlasma, gregtech.api.enums.Materials.Hydrogen, 1L))
             .itemOutputs(gregtech.api.enums.Materials.Empty.getCells(1))
-            .metadata(FUEL_VALUE, 20000)
+            .metadata(FUEL_VALUE, 10000)
             .addTo(BartWorksRecipeMaps.acidGenFuels);
     }
 }

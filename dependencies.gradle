@@ -67,6 +67,9 @@ dependencies {
     // compileOnly(gtnh("witchery"))
     compileOnly(gtnh("amunra"))
     compileOnly(gtnh("twilightforest"))
+    runtimeOnlyNonPublishable(gtnh("MatterManipulator"))
+    runtimeOnlyNonPublishable(gtnh("Angelica"))
+    runtimeOnlyNonPublishable(files("libs/etfuturum-2.6.48-GTNH-dev.jar"))
     runtimeOnlyNonPublishable(files("libs/worldedit-v0.0.9-dev.jar"))
 }
 

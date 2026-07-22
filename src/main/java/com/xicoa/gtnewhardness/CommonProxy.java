@@ -1,6 +1,7 @@
 package com.xicoa.gtnewhardness;
 
 import com.xicoa.gtnewhardness.loaders.RecipeLoader;
+import com.xicoa.gtnewhardness.loaders.BlockLoader;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -12,12 +13,14 @@ public class CommonProxy {
     // preInit "Run before anything else. Read your config, create blocks, items,
     // etc, and register them with the
     // GameRegistry." (Remove if not needed)
-    public void preInit(FMLPreInitializationEvent event) {}
+    public void preInit(FMLPreInitializationEvent event) {
+        BlockLoader.load();
+    }
 
     // load "Do your mod setup. Build whatever data structures you care about.
     // Register recipes." (Remove if not needed)
     public void init(FMLInitializationEvent event) {
-        RecipeLoader.init();
+        RecipeLoader.load();
     }
 
     // postInit "Handle interaction with other mods, complete your setup based on

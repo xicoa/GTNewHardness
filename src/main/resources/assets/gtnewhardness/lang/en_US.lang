@@ -1,0 +1,13 @@
+gtnewhardness.blockcasings.0.name=Transcendent Stable Machine Casing
+
+
+
+gtnewhardness.multiblock.NeutralizationEngine.mechanism.t4info=Tier 4 casing will update some mechanism
+gtnewhardness.multiblock.NeutralizationEngine.structure_tiers=Structure has §f4 Tiers§7, §fTier§7 determines §9Base Decay§7 and §3Capacity§7:
+gtnewhardness.multiblock.NeutralizationEngine.t4detail.1=T4 casing additional information:
+gtnewhardness.multiblock.NeutralizationEngine.t4detail.2=§6Residue Rate §7is calculated as §f0.05§7*§dBase Fuel Value (EU/L)§7^§f0.6
+gtnewhardness.multiblock.NeutralizationEngine.t4detail.3=If §cToxic Residue§7 is greater than §f0.15*§7§3Capacity§7, §cToxic Residue§7 §fincrease§7 
+gtnewhardness.multiblock.NeutralizationEngine.t4detail.4=will be multiplied by §f(1+(0.15*§7§3Capacity§7§f-§7§cToxic Residue§7§f)/3,000,000,000)§7
+gtnewhardness.multiblock.NeutralizationEngine.t4detail.5=If §cToxic Residue§7 is greater than §f0.3*§7§3Capacity§7, §foutput EU§7 will be 
+gtnewhardness.multiblock.NeutralizationEngine.t4detail.6=multiplied by §f(1+(log(0.3*§7§3Capacity§7§f)-log(§7§cToxic Residue§7§f))/log(5))§7
+
