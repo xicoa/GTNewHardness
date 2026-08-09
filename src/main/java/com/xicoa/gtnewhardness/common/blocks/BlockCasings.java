@@ -21,23 +21,31 @@ import gregtech.common.blocks.MaterialCasings;
 public class BlockCasings extends BlockCasingsAbstract {
 
     public static final byte TEXTURE_PAGE = 105;
-    public static final byte MAX_META = 5;
+    public static final byte MAX_META = 6;
     public static final byte TEXTURE_START_INDEX = 0;
 
     public static final int MACHINE_CASING_TRANSCENDENT_STABLE_TEXTURE_ID = GTUtility.getTextureId(TEXTURE_PAGE, TEXTURE_START_INDEX, (byte) 0);
+    public static final int MACHINE_CASING_SHOCKWAVE_REFLECTING_TEXTURE_ID = GTUtility.getTextureId(TEXTURE_PAGE, TEXTURE_START_INDEX, (byte) 1);
+    public static final int MACHINE_CASING_WITH_COIL_SHOCKWAVE_REFLECTING_TEXTURE_ID = GTUtility.getTextureId(TEXTURE_PAGE, TEXTURE_START_INDEX, (byte) 2);
 
 
     public BlockCasings() {
         super(ItemCasings.class, "gtnewhardness.blockcasings", MaterialCasings.INSTANCE, MAX_META + 1);
 
         ItemList.MACHINE_CASING_TRANSCENDENT_STABLE.set(new ItemStack(this, 1, 0));
+        ItemList.MACHINE_CASING_SHOCKWAVE_REFLECTING.set(new ItemStack(this, 1, 1));
+        ItemList.MACHINE_CASING_WITH_COIL_SHOCKWAVE_REFLECTING.set(new ItemStack(this, 1, 2));
+        ItemList.MACHINE_CASING_OBLIQUE_SHOCKWAVE_REFLECTING.set(new ItemStack(this, 1, 3));
+        ItemList.MACHINE_CASING_MAGNETICALLY_LEVITATED_HIGH_DENSITY_EXPLOSIVE_UNFILLED.set(new ItemStack(this, 1, 4));
+        ItemList.MACHINE_CASING_MAGNETICALLY_LEVITATED_HIGH_DENSITY_EXPLOSIVE_FILLED.set(new ItemStack(this, 1, 5));
+        ItemList.MACHINE_CASING_PLASMA_CONTAINMENT.set(new ItemStack(this, 1, 6));
 
     }
 
-    // @Override
-    // public int getTextureIndex(int aMeta) {
-    //     return GTUtility.getTextureId(TEXTURE_PAGE, TEXTURE_START_INDEX, (byte) aMeta);
-    // }
+    @Override
+    public int getTextureIndex(int aMeta) {
+        return GTUtility.getTextureId(TEXTURE_PAGE, TEXTURE_START_INDEX, (byte) aMeta);
+    }
 
     @Override
     @SideOnly(Side.CLIENT)
@@ -45,10 +53,15 @@ public class BlockCasings extends BlockCasingsAbstract {
         return switch (aMeta) {
             case 0 -> NHBlockIconContainer.MACHINE_CASING_TRANSCENDENT_STABLE.getIcon();
             case 1 -> NHBlockIconContainer.MACHINE_CASING_SHOCKWAVE_REFLECTING.getIcon();
-            case 2 -> NHBlockIconContainer.MACHINE_CASING_MAGNETIC_CONFINING_SHOCKWAVE_REFLECTING.getIcon();
+            case 2 -> NHBlockIconContainer.MACHINE_CASING_WITH_COIL_SHOCKWAVE_REFLECTING.getIcon();
             case 3 -> NHBlockIconContainer.MACHINE_CASING_OBLIQUE_SHOCKWAVE_REFLECTING.getIcon();
-            case 4 -> NHBlockIconContainer.MACHINE_CASING_MAGNETICALLY_LEVITATED_HIGH_DENSITY_EXPLOSIVE_FILLED.getIcon();
-            case 5 -> NHBlockIconContainer.MACHINE_CASING_PLASMA_CONFINING.getIcon();
+            case 4 -> (ordinalSide == 1 || ordinalSide == 0)
+                ? NHBlockIconContainer.MACHINE_CASING_MAGNETICALLY_LEVITATED_HIGH_DENSITY_EXPLOSIVE_UNFILLED_TOP.getIcon()
+                : NHBlockIconContainer.MACHINE_CASING_MAGNETICALLY_LEVITATED_HIGH_DENSITY_EXPLOSIVE_UNFILLED_SIDE.getIcon();
+            case 5 -> (ordinalSide == 1 || ordinalSide == 0)
+                ? NHBlockIconContainer.MACHINE_CASING_MAGNETICALLY_LEVITATED_HIGH_DENSITY_EXPLOSIVE_FILLED_TOP.getIcon()
+                : NHBlockIconContainer.MACHINE_CASING_MAGNETICALLY_LEVITATED_HIGH_DENSITY_EXPLOSIVE_FILLED_SIDE.getIcon();
+            case 6 -> NHBlockIconContainer.MACHINE_CASING_PLASMA_CONTAINMENT.getIcon();
             default -> Textures.BlockIcons.MACHINE_CASING_ROBUST_TUNGSTENSTEEL.getIcon();
         };
     }

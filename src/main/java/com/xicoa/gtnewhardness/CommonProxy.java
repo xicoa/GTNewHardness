@@ -2,6 +2,7 @@ package com.xicoa.gtnewhardness;
 
 import com.xicoa.gtnewhardness.loaders.RecipeLoader;
 import com.xicoa.gtnewhardness.loaders.BlockLoader;
+import com.xicoa.gtnewhardness.loaders.MachineLoader;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -15,6 +16,7 @@ public class CommonProxy {
     // GameRegistry." (Remove if not needed)
     public void preInit(FMLPreInitializationEvent event) {
         BlockLoader.load();
+        MachineLoader.load();
     }
 
     // load "Do your mod setup. Build whatever data structures you care about.

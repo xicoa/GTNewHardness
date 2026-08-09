@@ -61,7 +61,7 @@ public abstract class MixinMTELargeNeutralizationEngine implements ILongGenerato
 
     @Inject(method = "getStructureCasingTier", at = @At("HEAD"), cancellable = true, remap = false)
     private static void gtnewhardness$addExtraCasingTier(Block block, int meta, CallbackInfoReturnable<Integer> cir) {
-        if (block == Blocks.TranscendentStableCasing && meta == 0) {
+        if (block == Blocks.BlockCasings && meta == 0) {
             cir.setReturnValue(4);
         }
     }
@@ -76,7 +76,7 @@ public abstract class MixinMTELargeNeutralizationEngine implements ILongGenerato
             + ")Lcom/gtnewhorizon/structurelib/structure/IStructureElement;", remap = false), index = 1, remap = false)
     private List<Pair<Block, Integer>> gtnewhardness$addExtraCasingHint(List<Pair<Block, Integer>> original) {
         List<Pair<Block, Integer>> result = new ArrayList<>(original);
-        result.add(Pair.of(Blocks.TranscendentStableCasing, 0));
+        result.add(Pair.of(Blocks.BlockCasings, 0));
         return result;
     }
 

@@ -4,6 +4,6 @@ import com.xicoa.gtnewhardness.common.enums.Blocks;
 
 public class BlocksRegister {
     public static void register() {
-        Blocks.TranscendentStableCasing = new BlockCasings();
+        Blocks.BlockCasings = new BlockCasings();
     }
 }

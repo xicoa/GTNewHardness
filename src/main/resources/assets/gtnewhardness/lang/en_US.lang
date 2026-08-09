@@ -1,5 +1,11 @@
+Material.mixedacid=Mixed Acid
+Material.electronplasma=Electron
+
+gtnewhardness.recipe.shockwave_energy_enhancer=Shockwave Energy Enhancer
+
 gtnewhardness.blockcasings.0.name=Transcendent Stable Machine Casing
 
+gt.blockmachines.multimachine.shockwave_energy_enhancer.name=Shockwave Energy Enhancer
 
 
 gtnewhardness.multiblock.NeutralizationEngine.mechanism.t4info=Tier 4 casing will update some mechanism
@@ -10,4 +16,31 @@ gtnewhardness.multiblock.NeutralizationEngine.t4detail.3=If §cToxic Residue§7 
 gtnewhardness.multiblock.NeutralizationEngine.t4detail.4=will be multiplied by §f(1+(0.15*§7§3Capacity§7§f-§7§cToxic Residue§7§f)/3,000,000,000)§7
 gtnewhardness.multiblock.NeutralizationEngine.t4detail.5=If §cToxic Residue§7 is greater than §f0.3*§7§3Capacity§7, §foutput EU§7 will be 
 gtnewhardness.multiblock.NeutralizationEngine.t4detail.6=multiplied by §f(1+(log(0.3*§7§3Capacity§7§f)-log(§7§cToxic Residue§7§f))/log(5))§7
+
+gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.recipe_note=§fCheck tooltip of§7 §6Shockwave Energy Enhancer§7 §ffor more details§7
+gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.description=Still far from achieving fusion conditions
+gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.automation1=To match the best energy of explosive, at least 1 measurement is required.
+gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.random_mechanism1=This machine will generate a random §6lambda§7 between §f%d§7 and §f%d§7.
+gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.measurement1=For each measurement operations, §f%d L toluene§7 are required,
+gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.measurement2=machine will consume §bx§7 §fL toluene§7 and return the remaining part.
+gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.measurement3=Each measurement operation will take §by§7 §fticks§7. Where §bx§7§f,§7 §by§7§f∼Poisson(§7§6lambda§7§f)§7.
+gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.measurement4=Measurements can be taken any number of §4times§7.
+gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.production1=If %s and %s are provided,
+gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.production2=with quantities of §5a§7 and §5b§7 respectively, then all of them will be consumed,
+gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.production3=production operation will be executed. Production will use §f30*(log(§7§5b§7§f)/2+1) seconds§7,
+gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.production4=total energy usage is §f%d*6000*§7§5b§7 §fEU§7. Finally, §f1000§7§5b§7§f/(1+15(§7§5b§7§f/§7§5a§7§f-§7§6lambda§7§f)^2/§7§6lambda§7§f^0.4/§7§4measurement times§7§f^0.8) L§7
+gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.production5=%s will be produced.
+gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.poission1=All Poisson variables are restricted to be greater than §f0§7 and less than §f%d§7.
+gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.controller=Front center
+gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.casing.shockwave=Shockwave Reflecting Machine Casing
+gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.casing.coil=Shockwave Reflecting Machine Casing with Coil
+gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.casing.oblique=Oblique Shockwave Reflecting Machine Casing
+gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.casing.explosive=Magnetically Levitated High-Density Explosive-Filled Machine Casing
+gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.casing.plasma=Plasma Containment Machine Casing
+gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.hatch_position=Any Shockwave Reflecting Machine Casing
+
+
+
+
+
 

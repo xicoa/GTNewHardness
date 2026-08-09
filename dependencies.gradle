@@ -44,6 +44,7 @@ elytraModpackVersion {
 }
 
 dependencies {
+    shadowImplementation("org.apache.commons:commons-math3:3.6.1")
     implementation(gtnh("GT5-Unofficial"))
     implementation(gtnh("GTNHLib"))
     implementation(gtnh("AE2FluidCraft-Rework"))

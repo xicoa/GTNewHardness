@@ -2,6 +2,8 @@
 .settings
 /.idea/
 /.vscode/
+/refs/
+/mechanism/
 /run/
 /build/
 /eclipse/
