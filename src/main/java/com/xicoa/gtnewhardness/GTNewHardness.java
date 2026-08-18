@@ -18,7 +18,7 @@ import gregtech.api.GregTechAPI;
     version = Tags.VERSION,
     name = "GTNewHardness",
     acceptedMinecraftVersions = "[1.7.10]",
-    dependencies = "required-after:gregtech")
+    dependencies = "required-after:gregtech;required-after:bartworks;required-after:Botania")
 public class GTNewHardness {
 
     public static final String MODID = "gtnewhardness";

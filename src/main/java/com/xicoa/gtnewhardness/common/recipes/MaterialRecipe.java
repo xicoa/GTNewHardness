@@ -2,46 +2,31 @@ package com.xicoa.gtnewhardness.common.recipes;
 
 import static gregtech.api.recipe.RecipeMaps.BEAMCRAFTER_METADATA;
 import static gregtech.api.recipe.RecipeMaps.beamcrafterRecipes;
+import static gregtech.api.recipe.RecipeMaps.distillationTowerRecipes;
+import static gregtech.api.recipe.RecipeMaps.distilleryRecipes;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 import static gregtech.api.util.GTRecipeBuilder.TICKS;
-
-import com.xicoa.gtnewhardness.common.enums.Materials;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
+import com.xicoa.gtnewhardness.common.enums.Materials;
+
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.TierEU;
-import gregtech.api.util.GTUtility;
 import gregtech.loaders.postload.recipes.beamcrafter.BeamCrafterMetadata;
 import gtnhlanth.common.beamline.Particle;
-import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 
 public class MaterialRecipe {
 
     public static void init() {
-        mixedAcidRecipe();
         hydrogenPlasmaRecipe();
         electronPlasmaRecipe();
+        impureExcitedHydrogenPlasmaRelatedRecipe();
     }
 
-    public static void mixedAcidRecipe() {
-        GTValues.RA.stdBuilder()
-            .itemInputs(gregtech.api.enums.Materials.Diamond.getDust(4), GTUtility.getIntegratedCircuit(23))
-            .fluidInputs(
-                gregtech.api.enums.Materials.SulfuricAcid.getFluid(1_000),
-                gregtech.api.enums.Materials.NitricAcid.getFluid(1_000),
-                gregtech.api.enums.Materials.HydrochloricAcid.getFluid(1_000)
-            // gregtech.api.enums.Materials.fluoroantimonicAcid.getFluidOrGas(1_000)
-            )
-            .fluidOutputs(Materials.mixedAcid.getFluid(1_000))
-            .eut(TierEU.RECIPE_EV)
-            .duration(20 * SECONDS)
-            .addTo(GTPPRecipeMaps.mixerNonCellRecipes);
-    }
-
-    public static void hydrogenPlasmaRecipe() {
+    private static void hydrogenPlasmaRecipe() {
         GTValues.RA.stdBuilder()
             .fluidInputs(gregtech.api.enums.Materials.Hydrogen.getGas(1000))
             .fluidOutputs(gregtech.api.enums.Materials.Hydrogen.getPlasma(100))
@@ -58,7 +43,7 @@ public class MaterialRecipe {
             .addTo(beamcrafterRecipes);
     }
 
-    public static void electronPlasmaRecipe() {
+    private static void electronPlasmaRecipe() {
         ItemStack filledSmallSunnariumBattery = ItemList.BatteryHull_EV_Full.get(1L);
         NBTTagCompound euNBT_small = filledSmallSunnariumBattery.getTagCompound();
         if (euNBT_small != null) {
@@ -89,10 +74,9 @@ public class MaterialRecipe {
             filledLargeSunnariumBattery.setTagCompound(euNBT_large);
         }
 
-
         GTValues.RA.stdBuilder()
             .itemInputs(filledSmallSunnariumBattery)
-            .fluidOutputs(Materials.electron.getPlasma(640))
+            .fluidOutputs(Materials.electronPlasma.getPlasma(640))
             .metadata(
                 BEAMCRAFTER_METADATA,
                 BeamCrafterMetadata.builder()
@@ -107,32 +91,57 @@ public class MaterialRecipe {
 
         GTValues.RA.stdBuilder()
             .itemInputs(filledMediumSunnariumBattery)
-            .fluidOutputs(Materials.electron.getPlasma(2560))
+            .fluidOutputs(Materials.electronPlasma.getPlasma(2560))
             .metadata(
-                    BEAMCRAFTER_METADATA,
-                    BeamCrafterMetadata.builder()
-                            .particleID_A(Particle.ELECTRON.getId())
-                            .particleID_B(Particle.ELECTRON.getId())
-                            .amount_A(32)
-                            .amount_B(32)
-                            .build())
+                BEAMCRAFTER_METADATA,
+                BeamCrafterMetadata.builder()
+                    .particleID_A(Particle.ELECTRON.getId())
+                    .particleID_B(Particle.ELECTRON.getId())
+                    .amount_A(32)
+                    .amount_B(32)
+                    .build())
             .duration(5 * TICKS)
             .eut(TierEU.RECIPE_UV)
             .addTo(beamcrafterRecipes);
 
         GTValues.RA.stdBuilder()
             .itemInputs(filledLargeSunnariumBattery)
-            .fluidOutputs(Materials.electron.getPlasma(10240))
+            .fluidOutputs(Materials.electronPlasma.getPlasma(10240))
             .metadata(
-                    BEAMCRAFTER_METADATA,
-                    BeamCrafterMetadata.builder()
-                            .particleID_A(Particle.ELECTRON.getId())
-                            .particleID_B(Particle.ELECTRON.getId())
-                            .amount_A(64)
-                            .amount_B(64)
-                            .build())
+                BEAMCRAFTER_METADATA,
+                BeamCrafterMetadata.builder()
+                    .particleID_A(Particle.ELECTRON.getId())
+                    .particleID_B(Particle.ELECTRON.getId())
+                    .amount_A(64)
+                    .amount_B(64)
+                    .build())
             .duration(5 * TICKS)
             .eut(TierEU.RECIPE_UV)
             .addTo(beamcrafterRecipes);
+    }
+
+    private static void impureExcitedHydrogenPlasmaRelatedRecipe() {
+        GTValues.RA.stdBuilder()
+            .circuit(1)
+            .fluidInputs(Materials.impureExcitedHydrogenPlasma.getPlasma(100))
+            .fluidOutputs(Materials.excitedHydrogenPlasma.getPlasma(60))
+            .duration(20 * SECONDS)
+            .eut(TierEU.RECIPE_LuV)
+            .addTo(distilleryRecipes);
+
+        GTValues.RA.stdBuilder()
+            .circuit(2)
+            .fluidInputs(Materials.impureExcitedHydrogenPlasma.getPlasma(100))
+            .fluidOutputs(Materials.mixedAcidicPlasma.getPlasma(40))
+            .duration(20 * SECONDS)
+            .eut(TierEU.RECIPE_LuV)
+            .addTo(distilleryRecipes);
+
+        GTValues.RA.stdBuilder()
+            .fluidInputs(Materials.impureExcitedHydrogenPlasma.getPlasma(100))
+            .fluidOutputs(Materials.excitedHydrogenPlasma.getPlasma(70), Materials.mixedAcidicPlasma.getPlasma(50))
+            .duration(20 * SECONDS)
+            .eut(TierEU.RECIPE_LuV)
+            .addTo(distillationTowerRecipes);
     }
 }

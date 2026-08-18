@@ -9,35 +9,57 @@ import gregtech.api.enums.TextureSet;
 
 public class MaterialsRegister {
 
-    private static final int MIXED_ACID_META_ID = 250;
     private static final int ELECTRON_PLASMA_META_ID = 251;
+    private static final int IMPURE_EXCITED_HYDROGEN_PLASMA_META_ID = 252;
+    private static final int EXCITED_HYDROGEN_PLASMA_META_ID = 253;
+    private static final int MIXED_ACIDIC_PLASMA_META_ID = 254;
 
     public static void register() {
 
-        Materials.mixedAcid = new MaterialBuilder().setName("MixedAcid")
-            .setDefaultLocalName("Mixed Acid")
-            .setChemicalFormula("H₅?₁₈")
-            .setIconSet(TextureSet.SET_FLUID)
-            .setARGB(0xffa0a0a0)
-            .addCell()
-            .addFluid()
-            .addAspect(TCAspects.METALLUM, 2)
-            .addAspect(TCAspects.VOLATUS, 1)
-            .constructMaterial();
-
-        Materials.electron = new MaterialBuilder().setName("ElectronPlasma")
+        Materials.electronPlasma = new MaterialBuilder().setName("electronPlasma")
             .setDefaultLocalName("Electron")
             .setChemicalFormula("e⁻")
             .setIconSet(TextureSet.SET_FLUID)
             .setARGB(0xffffffff)
-            .addFluid()
             .addPlasma()
             .addCell()
-            .addAspect(TCAspects.ELECTRUM, 3)
+            .addAspect(TCAspects.ELECTRUM, 16)
             .constructMaterial();
 
-        registerGeneratedMaterial(Materials.mixedAcid, MIXED_ACID_META_ID);
-        registerGeneratedMaterial(Materials.electron, ELECTRON_PLASMA_META_ID);
+        Materials.impureExcitedHydrogenPlasma = new MaterialBuilder().setName("impureExcitedHydrogenPlasma")
+            .setDefaultLocalName("Impure Excited Hydrogen")
+            .setChemicalFormula("H⁺??")
+            .setIconSet(TextureSet.SET_FLUID)
+            .setARGB(0xff6666ff)
+            .addPlasma()
+            .addCell()
+            .addAspect(TCAspects.ELECTRUM, 16)
+            .constructMaterial();
+
+        Materials.excitedHydrogenPlasma = new MaterialBuilder().setName("excitedHydrogenPlasma")
+            .setDefaultLocalName("Excited Hydrogen")
+            .setChemicalFormula("H⁺*")
+            .setIconSet(TextureSet.SET_FLUID)
+            .setARGB(0xff0044ff)
+            .addPlasma()
+            .addCell()
+            .addAspect(TCAspects.ELECTRUM, 16)
+            .constructMaterial();
+
+        Materials.mixedAcidicPlasma = new MaterialBuilder().setName("mixedAcidicPlasma")
+            .setDefaultLocalName("Mixed Acidic Plasma")
+            .setChemicalFormula("??")
+            .setIconSet(TextureSet.SET_FLUID)
+            .setARGB(0xff839192)
+            .addPlasma()
+            .addCell()
+            .addAspect(TCAspects.ELECTRUM, 16)
+            .constructMaterial();
+
+        registerGeneratedMaterial(Materials.electronPlasma, ELECTRON_PLASMA_META_ID);
+        registerGeneratedMaterial(Materials.impureExcitedHydrogenPlasma, IMPURE_EXCITED_HYDROGEN_PLASMA_META_ID);
+        registerGeneratedMaterial(Materials.excitedHydrogenPlasma, EXCITED_HYDROGEN_PLASMA_META_ID);
+        registerGeneratedMaterial(Materials.mixedAcidicPlasma, MIXED_ACIDIC_PLASMA_META_ID);
     }
 
     private static void registerGeneratedMaterial(gregtech.api.enums.Materials material, int metaItemSubID) {

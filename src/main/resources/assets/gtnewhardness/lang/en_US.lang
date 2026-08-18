@@ -1,9 +1,16 @@
-Material.mixedacid=Mixed Acid
 Material.electronplasma=Electron
+Material.impureexcitedhydrogenplasma=Impure Excited Hydrogen
+Material.excitedhydrogenplasma=Excited Hydrogen
 
 gtnewhardness.recipe.shockwave_energy_enhancer=Shockwave Energy Enhancer
 
 gtnewhardness.blockcasings.0.name=Transcendent Stable Machine Casing
+gtnewhardness.blockcasings.1.name=Shockwave Reflecting Machine Casing
+gtnewhardness.blockcasings.2.name=Shockwave Reflecting Machine Casing With Coil
+gtnewhardness.blockcasings.3.name=Oblique Shockwave Reflecting Machine Casing
+gtnewhardness.blockcasings.4.name=Unfilled Magnetically Levitated High Density Explosive Machine Casing
+gtnewhardness.blockcasings.5.name=Filled Magnetically Levitated High Density Explosive Machine Casing
+gtnewhardness.blockcasings.6.name=Plasma Containment Machine Casing
 
 gt.blockmachines.multimachine.shockwave_energy_enhancer.name=Shockwave Energy Enhancer
 
@@ -38,9 +45,3 @@ gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.casing.oblique=Obl
 gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.casing.explosive=Magnetically Levitated High-Density Explosive-Filled Machine Casing
 gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.casing.plasma=Plasma Containment Machine Casing
 gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.hatch_position=Any Shockwave Reflecting Machine Casing
-
-
-
-
-
-

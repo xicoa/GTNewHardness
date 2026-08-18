@@ -1,8 +1,8 @@
 package com.xicoa.gtnewhardness;
 
-import com.xicoa.gtnewhardness.loaders.RecipeLoader;
 import com.xicoa.gtnewhardness.loaders.BlockLoader;
 import com.xicoa.gtnewhardness.loaders.MachineLoader;
+import com.xicoa.gtnewhardness.loaders.RecipeLoader;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;

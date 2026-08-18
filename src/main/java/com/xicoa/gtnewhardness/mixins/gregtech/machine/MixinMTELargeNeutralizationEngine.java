@@ -3,21 +3,12 @@ package com.xicoa.gtnewhardness.mixins.gregtech.machine;
 import static com.gtnewhorizon.gtnhlib.util.numberformatting.NumberFormatUtil.formatNumber;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 
-import com.xicoa.gtnewhardness.common.blocks.BlockCasings;
-import com.xicoa.gtnewhardness.common.enums.Blocks;
-import com.xicoa.gtnewhardness.common.enums.Materials;
-import com.xicoa.gtnewhardness.common.interfaces.ILongGenerator;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.FluidStack;
-import gregtech.api.enums.OrePrefixes;
-import gregtech.api.util.GTOreDictUnificator;
-import gregtech.api.util.MultiblockTooltipBuilder;
-import gregtech.common.tileentities.machines.multi.MTELargeNeutralizationEngine;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.spongepowered.asm.mixin.Mixin;
@@ -30,10 +21,18 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import com.xicoa.gtnewhardness.common.blocks.BlockCasings;
+import com.xicoa.gtnewhardness.common.enums.Blocks;
+import com.xicoa.gtnewhardness.common.enums.Materials;
+import com.xicoa.gtnewhardness.common.interfaces.ILongGenerator;
+
+import gregtech.api.util.MultiblockTooltipBuilder;
+import gregtech.common.tileentities.machines.multi.MTELargeNeutralizationEngine;
+
 @Mixin(value = MTELargeNeutralizationEngine.class, remap = false)
 public abstract class MixinMTELargeNeutralizationEngine implements ILongGenerator {
 
-    private final static FluidStack electronPlasma = Materials.electron.getPlasma(1000);
+    private final static FluidStack electronPlasma = Materials.electronPlasma.getPlasma(1000);
 
     @Shadow(remap = false)
     private float boosterEUBoost;
@@ -66,14 +65,20 @@ public abstract class MixinMTELargeNeutralizationEngine implements ILongGenerato
         }
     }
 
-    @ModifyArg(method = "getStructureDefinition", at = @At(value = "INVOKE", target = "Lcom/gtnewhorizon/structurelib/structure/StructureUtility;"
-            + "ofBlocksTiered("
-            + "Lcom/gtnewhorizon/structurelib/structure/ITierConverter;"
-            + "Ljava/util/List;"
-            + "Ljava/lang/Object;"
-            + "Ljava/util/function/BiConsumer;"
-            + "Ljava/util/function/Function;"
-            + ")Lcom/gtnewhorizon/structurelib/structure/IStructureElement;", remap = false), index = 1, remap = false)
+    @ModifyArg(
+        method = "getStructureDefinition",
+        at = @At(
+            value = "INVOKE",
+            target = "Lcom/gtnewhorizon/structurelib/structure/StructureUtility;" + "ofBlocksTiered("
+                + "Lcom/gtnewhorizon/structurelib/structure/ITierConverter;"
+                + "Ljava/util/List;"
+                + "Ljava/lang/Object;"
+                + "Ljava/util/function/BiConsumer;"
+                + "Ljava/util/function/Function;"
+                + ")Lcom/gtnewhorizon/structurelib/structure/IStructureElement;",
+            remap = false),
+        index = 1,
+        remap = false)
     private List<Pair<Block, Integer>> gtnewhardness$addExtraCasingHint(List<Pair<Block, Integer>> original) {
         List<Pair<Block, Integer>> result = new ArrayList<>(original);
         result.add(Pair.of(Blocks.BlockCasings, 0));
@@ -140,7 +145,10 @@ public abstract class MixinMTELargeNeutralizationEngine implements ILongGenerato
         if (this.structureTier != 4) {
             return;
         }
-        cir.setReturnValue((int) (getResidueRate() * fuelConsumption * gtnewhardness$getT4ResidueFactorWithResidue() * getRandomIncreaseMultiplier()));
+        cir.setReturnValue(
+            (int) (getResidueRate() * fuelConsumption
+                * gtnewhardness$getT4ResidueFactorWithResidue()
+                * getRandomIncreaseMultiplier()));
     }
 
     @Unique
@@ -162,7 +170,10 @@ public abstract class MixinMTELargeNeutralizationEngine implements ILongGenerato
 
     @Unique
     private long gtnewhardness$getEUOutputLong(int fluidAmount) {
-        return Math.min((long) (gtnewhardness$getFuelEUOutputLong(fluidAmount) * this.boosterEUBoost * gtnewhardness$getT4EUOutputFactorWithResidue()), this.getMaximumEUOutput());
+        return Math.min(
+            (long) (gtnewhardness$getFuelEUOutputLong(fluidAmount) * this.boosterEUBoost
+                * gtnewhardness$getT4EUOutputFactorWithResidue()),
+            this.getMaximumEUOutput());
     }
 
     @Override
@@ -184,30 +195,65 @@ public abstract class MixinMTELargeNeutralizationEngine implements ILongGenerato
         cir.setReturnValue((int) Math.min(Integer.MAX_VALUE, this.gtnewhardness$trueOutput));
     }
 
-    @Redirect(method = "createTooltip", at = @At(value = "INVOKE", target = "Lgregtech/api/util/MultiblockTooltipBuilder;addSeparator()Lgregtech/api/util/MultiblockTooltipBuilder;", ordinal = 1, remap = false), remap = false)
+    @Redirect(
+        method = "createTooltip",
+        at = @At(
+            value = "INVOKE",
+            target = "Lgregtech/api/util/MultiblockTooltipBuilder;addSeparator()Lgregtech/api/util/MultiblockTooltipBuilder;",
+            ordinal = 1,
+            remap = false),
+        remap = false)
     protected MultiblockTooltipBuilder gtnewhardness$insertElectronTooltip(MultiblockTooltipBuilder tt) {
-        return tt.addInfo(StatCollector.translateToLocalFormatted(
-                "gt.multiblock.NeutralizationEngine.alkali_text",
-                "Electron Plasma",
-                800,
-                "2000L")).addSeparator();
+        return tt
+            .addInfo(
+                StatCollector.translateToLocalFormatted(
+                    "gt.multiblock.NeutralizationEngine.alkali_text",
+                    "Electron Plasma",
+                    800,
+                    "2000L"))
+            .addSeparator();
     }
 
-    @Redirect(method = "createTooltip", at = @At(value = "INVOKE", target = "Lgregtech/api/util/MultiblockTooltipBuilder;addSeparator()Lgregtech/api/util/MultiblockTooltipBuilder;", ordinal = 2, remap = false), remap = false)
+    @Redirect(
+        method = "createTooltip",
+        at = @At(
+            value = "INVOKE",
+            target = "Lgregtech/api/util/MultiblockTooltipBuilder;addSeparator()Lgregtech/api/util/MultiblockTooltipBuilder;",
+            ordinal = 2,
+            remap = false),
+        remap = false)
     protected MultiblockTooltipBuilder gtnewhardness$insertT4MechanismChange(MultiblockTooltipBuilder tt) {
-        return tt.addInfo(StatCollector.translateToLocal("gtnewhardness.multiblock.NeutralizationEngine.mechanism.t4info")).addSeparator();
+        return tt
+            .addInfo(StatCollector.translateToLocal("gtnewhardness.multiblock.NeutralizationEngine.mechanism.t4info"))
+            .addSeparator();
     }
 
-    @ModifyArg(method = "createTooltip", at = @At(value = "INVOKE", target = "Lgregtech/api/util/MultiblockTooltipBuilder;"
-            + "addInfo(Ljava/lang/String;)"
-            + "Lgregtech/api/util/MultiblockTooltipBuilder;", ordinal = 16, remap = false), index = 0, require = 1, remap = false)
+    @ModifyArg(
+        method = "createTooltip",
+        at = @At(
+            value = "INVOKE",
+            target = "Lgregtech/api/util/MultiblockTooltipBuilder;" + "addInfo(Ljava/lang/String;)"
+                + "Lgregtech/api/util/MultiblockTooltipBuilder;",
+            ordinal = 16,
+            remap = false),
+        index = 0,
+        require = 1,
+        remap = false)
     protected String gtnewhardness$changeStructureTiers(String originalText) {
         return StatCollector.translateToLocal("gtnewhardness.multiblock.NeutralizationEngine.structure_tiers");
     }
 
-    @Redirect(method = "createTooltip", at = @At(value = "INVOKE", target = "Lgregtech/api/util/MultiblockTooltipBuilder;addSupportAny()Lgregtech/api/util/MultiblockTooltipBuilder;", ordinal = 0, remap = false), remap = false)
+    @Redirect(
+        method = "createTooltip",
+        at = @At(
+            value = "INVOKE",
+            target = "Lgregtech/api/util/MultiblockTooltipBuilder;addSupportAny()Lgregtech/api/util/MultiblockTooltipBuilder;",
+            ordinal = 0,
+            remap = false),
+        remap = false)
     protected MultiblockTooltipBuilder gtnewhardness$insertT4Tooltip(MultiblockTooltipBuilder tt) {
-        return tt.addInfo(
+        return tt
+            .addInfo(
                 StatCollector.translateToLocalFormatted(
                     "gt.multiblock.NeutralizationEngine.tier_info",
                     4,
@@ -215,14 +261,13 @@ public abstract class MixinMTELargeNeutralizationEngine implements ILongGenerato
                     1000,
                     formatNumber(Integer.MAX_VALUE)))
 
-                .addSupportAny()
-                .addSeparator()
-                .addInfo(StatCollector.translateToLocal("gtnewhardness.multiblock.NeutralizationEngine.t4detail.1"))
-                .addInfo(StatCollector.translateToLocal("gtnewhardness.multiblock.NeutralizationEngine.t4detail.2"))
-                .addInfo(StatCollector.translateToLocal("gtnewhardness.multiblock.NeutralizationEngine.t4detail.3"))
-                .addInfo(StatCollector.translateToLocal("gtnewhardness.multiblock.NeutralizationEngine.t4detail.4"))
-                .addInfo(StatCollector.translateToLocal("gtnewhardness.multiblock.NeutralizationEngine.t4detail.5"))
-                .addInfo(StatCollector.translateToLocal("gtnewhardness.multiblock.NeutralizationEngine.t4detail.6"));
+            .addSupportAny()
+            .addSeparator()
+            .addInfo(StatCollector.translateToLocal("gtnewhardness.multiblock.NeutralizationEngine.t4detail.1"))
+            .addInfo(StatCollector.translateToLocal("gtnewhardness.multiblock.NeutralizationEngine.t4detail.2"))
+            .addInfo(StatCollector.translateToLocal("gtnewhardness.multiblock.NeutralizationEngine.t4detail.3"))
+            .addInfo(StatCollector.translateToLocal("gtnewhardness.multiblock.NeutralizationEngine.t4detail.4"))
+            .addInfo(StatCollector.translateToLocal("gtnewhardness.multiblock.NeutralizationEngine.t4detail.5"))
+            .addInfo(StatCollector.translateToLocal("gtnewhardness.multiblock.NeutralizationEngine.t4detail.6"));
     }
 }
-

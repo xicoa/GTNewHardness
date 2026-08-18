@@ -1,14 +1,13 @@
 package com.xicoa.gtnewhardness.common.tileentities.machines.multi;
 
-import static com.xicoa.gtnewhardness.client.iconContainers.blocks.NHBlockIconContainer.OVERLAY_FRONT_SEE;
-import static com.xicoa.gtnewhardness.client.iconContainers.blocks.NHBlockIconContainer.OVERLAY_FRONT_SEE_ACTIVE;
-import static com.xicoa.gtnewhardness.client.iconContainers.blocks.NHBlockIconContainer.OVERLAY_FRONT_SEE_GLOW;
-import static com.xicoa.gtnewhardness.client.iconContainers.blocks.NHBlockIconContainer.OVERLAY_FRONT_SEE_ACTIVE_GLOW;
-
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofChain;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.onElementPass;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.transpose;
+import static com.xicoa.gtnewhardness.client.iconContainers.blocks.NHBlockIconContainer.OVERLAY_FRONT_SEE;
+import static com.xicoa.gtnewhardness.client.iconContainers.blocks.NHBlockIconContainer.OVERLAY_FRONT_SEE_ACTIVE;
+import static com.xicoa.gtnewhardness.client.iconContainers.blocks.NHBlockIconContainer.OVERLAY_FRONT_SEE_ACTIVE_GLOW;
+import static com.xicoa.gtnewhardness.client.iconContainers.blocks.NHBlockIconContainer.OVERLAY_FRONT_SEE_GLOW;
 import static gregtech.api.enums.HatchElement.Energy;
 import static gregtech.api.enums.HatchElement.ExoticEnergy;
 import static gregtech.api.enums.HatchElement.InputBus;
@@ -19,23 +18,14 @@ import static gregtech.api.enums.HatchElement.OutputBus;
 import static gregtech.api.enums.HatchElement.OutputHatch;
 import static gregtech.api.enums.Textures.BlockIcons.getCasingTextureForId;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
-import static gregtech.api.util.GTRecipeBuilder.MINUTES;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
-import static gregtech.api.util.GTStructureUtility.ofFrame;
 
-import com.xicoa.gtnewhardness.common.blocks.BlockCasings;
-import com.xicoa.gtnewhardness.common.enums.Blocks;
-import com.xicoa.gtnewhardness.common.enums.ItemList;
-import com.xicoa.gtnewhardness.common.recipeMaps.NHRecipeMaps;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.annotation.Nonnull;
 
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
@@ -48,32 +38,27 @@ import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructa
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
+import com.xicoa.gtnewhardness.common.blocks.BlockCasings;
+import com.xicoa.gtnewhardness.common.enums.Blocks;
+import com.xicoa.gtnewhardness.common.enums.ItemList;
+import com.xicoa.gtnewhardness.common.recipeMaps.NHRecipeMaps;
 
-import gregtech.api.GregTechAPI;
-import gregtech.api.casing.Casings;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.Textures;
 import gregtech.api.enums.TierEU;
-import gregtech.api.interfaces.IHatchElement;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.ICasingTextureProvider;
-import gregtech.api.interfaces.tileentity.IGregTechDeviceInformation;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.GregTechTileClientEvents;
 import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
 import gregtech.api.metatileentity.implementations.MTEHatch;
-import gregtech.api.metatileentity.implementations.MTEHatchDynamo;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.structure.error.StructureError;
-import gregtech.api.structure.error.StructureErrorRegistry;
 import gregtech.api.util.GTUtility;
-import gregtech.api.util.IGTHatchAdder;
 import gregtech.api.util.MultiblockTooltipBuilder;
-import gregtech.common.gui.modularui.multiblock.MTELargeNeutralizationEngineGui;
-import gregtech.common.gui.modularui.multiblock.base.MTEMultiBlockBaseGui;
 import gregtech.common.tileentities.machines.IDualInputHatch;
 
 public class MTEShockwaveEnergyEnhancer extends MTEExtendedPowerMultiBlockBase<MTEShockwaveEnergyEnhancer>
@@ -91,9 +76,12 @@ public class MTEShockwaveEnergyEnhancer extends MTEExtendedPowerMultiBlockBase<M
     private static final double LAMBDA_MIN = 20;
     private static final double LAMBDA_MAX = 200;
 
-    private static final ItemStack explosiveCasing = ItemList.MACHINE_CASING_MAGNETICALLY_LEVITATED_HIGH_DENSITY_EXPLOSIVE_FILLED.get(1);
+    private static final ItemStack explosiveCasing = ItemList.MACHINE_CASING_MAGNETICALLY_LEVITATED_HIGH_DENSITY_EXPLOSIVE_FILLED
+        .get(1);
     private static final ItemStack plasmaCasing = ItemList.MACHINE_CASING_PLASMA_CONTAINMENT.get(1);
-    private static final String outputPlasmaName = Materials.Hydrogen.getPlasma(1).getLocalizedName();
+    private static final String outputPlasmaName = com.xicoa.gtnewhardness.common.enums.Materials.impureExcitedHydrogenPlasma
+        .getPlasma(1)
+        .getLocalizedName();
 
     private int mCasing;
     private double lambda;
@@ -189,7 +177,12 @@ public class MTEShockwaveEnergyEnhancer extends MTEExtendedPowerMultiBlockBase<M
         consumeMatchingItems(inputs, explosiveCasing, explosiveAmount);
         consumeMatchingItems(inputs, plasmaCasing, plasmaBlockAmount);
         double timeFactor = Math.log(plasmaBlockAmount) / 2 + 1;
-        setupRecipe((int) Math.ceil(plasmaBlockAmount * TierEU.RECIPE_ZPM / timeFactor), (int) Math.ceil(PRODUCTION_DURATION * timeFactor), new ItemStack[0], outputs, true);
+        setupRecipe(
+            (int) Math.ceil(plasmaBlockAmount * TierEU.RECIPE_ZPM / timeFactor),
+            (int) Math.ceil(PRODUCTION_DURATION * timeFactor),
+            new ItemStack[0],
+            outputs,
+            true);
         return CheckRecipeResultRegistry.SUCCESSFUL;
     }
 
@@ -236,7 +229,8 @@ public class MTEShockwaveEnergyEnhancer extends MTEExtendedPowerMultiBlockBase<M
 
     private void generateLambda() {
         do {
-            lambda = LAMBDA_MIN + ThreadLocalRandom.current().nextDouble(LAMBDA_MAX - LAMBDA_MIN);
+            lambda = LAMBDA_MIN + ThreadLocalRandom.current()
+                .nextDouble(LAMBDA_MAX - LAMBDA_MIN);
         } while (lambda <= LAMBDA_MIN || lambda >= LAMBDA_MAX);
     }
 
@@ -280,7 +274,8 @@ public class MTEShockwaveEnergyEnhancer extends MTEExtendedPowerMultiBlockBase<M
         long remaining = amount;
         for (int i = 0; i < outputs.length; i++) {
             int fluidAmount = (int) Math.min(Integer.MAX_VALUE, remaining);
-            outputs[i] = Materials.Hydrogen.getPlasma(fluidAmount);
+            outputs[i] = com.xicoa.gtnewhardness.common.enums.Materials.impureExcitedHydrogenPlasma
+                .getPlasma(fluidAmount);
             remaining -= fluidAmount;
         }
         return outputs;
@@ -295,21 +290,67 @@ public class MTEShockwaveEnergyEnhancer extends MTEExtendedPowerMultiBlockBase<M
                 .addShape(
                     STRUCTURE_PIECE_MAIN,
                     transpose(
-                        new String[][] { { "               ", "               ", "               ", "               ", "               ", "      CCC      ", "     CCDCC     ", "     CDDDC     ", "     CCDCC     ", "      CCC      ",  "               ", "               ", "               ", "               ", "               " },
-                            { "               ", "               ", "               ", "     CCCCC     ", "    CCCCCCC    ", "   CCC   CCC   ", "   CC     CC   ", "   CC     CC   ", "   CC     CC   ", "   CCC   CCC   ",  "    CCCCCCC    ", "     CCCCC     ", "               ", "               ", "               " },
-                            { "               ", "               ", "     EEEEE     ", "    E     E    ", "   E       E   ", "  E         E  ", "  E         E  ", "  E         E  ", "  E         E  ", "  E         E  ",  "   E       E   ", "    E     E    ", "     EEEEE     ", "               ", "               " },
-                            { "               ", "     CCCCC     ", "    E     E    ", "   E       E   ", "  E         E  ", " C           C ", " C           C ", " C           C ", " C           C ", " C           C ",  "  E         E  ", "   E       E   ", "    E     E    ", "     CCCCC     ", "               " },
-                            { "               ", "    CCCCCCC    ", "   E       E   ", "  E         E  ", " C           C ", " C           C ", " C           C ", " C           C ", " C           C ", " C           C ",  " C           C ", "  E         E  ", "   E       E   ", "    CCCCCCC    ", "               " },
-                            { "      CCC      ", "   CCC   CCC   ", "  E         E  ", " C           C ", " C           C ", " C           C ", "C             C", "C             C", "C             C", " C           C ",  " C           C ", " C           C ", "  E         E  ", "   CCC   CCC   ", "      CCC      " },
-                            { "     CCDCC     ", "   CC     CC   ", "  E         E  ", " C           C ", " C           C ", "C             C", "C      F      C", "D     FFF     D", "C      F      C", "C             C",  " C           C ", " C           C ", "  E         E  ", "   CC     CC   ", "     CCDCC     " },
-                            { "     CD~DC     ", "   CC     CC   ", "  E         E  ", " C           C ", " C           C ", "C             C", "D     FFF     D", "D     FGF     D", "D     FFF     D", "C             C",  " C           C ", " C           C ", "  E         E  ", "   CC     CC   ", "     CDDDC     " },
-                            { "     CCDCC     ", "   CC     CC   ", "  E         E  ", " C           C ", " C           C ", "C             C", "C      F      C", "D     FFF     D", "C      F      C", "C             C",  " C           C ", " C           C ", "  E         E  ", "   CC     CC   ", "     CCDCC     " },
-                            { "      CCC      ", "   CCC   CCC   ", "  E         E  ", " C           C ", " C           C ", " C           C ", "C             C", "C             C", "C             C", " C           C ",  " C           C ", " C           C ", "  E         E  ", "   CCC   CCC   ", "      CCC      " },
-                            { "               ", "    CCCCCCC    ", "   E       E   ", "  E         E  ", " C           C ", " C           C ", " C           C ", " C           C ", " C           C ", " C           C ",  " C           C ", "  E         E  ", "   E       E   ", "    CCCCCCC    ", "               " },
-                            { "               ", "     CCCCC     ", "    E     E    ", "   E       E   ", "  E         E  ", " C           C ", " C           C ", " C           C ", " C           C ", " C           C ",  "  E         E  ", "   E       E   ", "    E     E    ", "     CCCCC     ", "               " },
-                            { "               ", "               ", "     EEEEE     ", "    E     E    ", "   E       E   ", "  E         E  ", "  E         E  ", "  E         E  ", "  E         E  ", "  E         E  ",  "   E       E   ", "    E     E    ", "     EEEEE     ", "               ", "               " },
-                            { "               ", "               ", "               ", "     CCCCC     ", "    CCCCCCC    ", "   CCC   CCC   ", "   CC     CC   ", "   CC     CC   ", "   CC     CC   ", "   CCC   CCC   ",  "    CCCCCCC    ", "     CCCCC     ", "               ", "               ", "               " },
-                            { "               ", "               ", "               ", "               ", "               ", "      CCC      ", "     CCDCC     ", "     CDDDC     ", "     CCDCC     ", "      CCC      ",  "               ", "               ", "               ", "               ", "               " } }))
+                        new String[][] {
+                            { "               ", "               ", "               ", "               ",
+                                "               ", "      CCC      ", "     CCDCC     ", "     CDDDC     ",
+                                "     CCDCC     ", "      CCC      ", "               ", "               ",
+                                "               ", "               ", "               " },
+                            { "               ", "               ", "               ", "     CCCCC     ",
+                                "    CCCCCCC    ", "   CCC   CCC   ", "   CC     CC   ", "   CC     CC   ",
+                                "   CC     CC   ", "   CCC   CCC   ", "    CCCCCCC    ", "     CCCCC     ",
+                                "               ", "               ", "               " },
+                            { "               ", "               ", "     EEEEE     ", "    E     E    ",
+                                "   E       E   ", "  E         E  ", "  E         E  ", "  E         E  ",
+                                "  E         E  ", "  E         E  ", "   E       E   ", "    E     E    ",
+                                "     EEEEE     ", "               ", "               " },
+                            { "               ", "     CCCCC     ", "    E     E    ", "   E       E   ",
+                                "  E         E  ", " C           C ", " C           C ", " C           C ",
+                                " C           C ", " C           C ", "  E         E  ", "   E       E   ",
+                                "    E     E    ", "     CCCCC     ", "               " },
+                            { "               ", "    CCCCCCC    ", "   E       E   ", "  E         E  ",
+                                " C           C ", " C           C ", " C           C ", " C           C ",
+                                " C           C ", " C           C ", " C           C ", "  E         E  ",
+                                "   E       E   ", "    CCCCCCC    ", "               " },
+                            { "      CCC      ", "   CCC   CCC   ", "  E         E  ", " C           C ",
+                                " C           C ", " C           C ", "C             C", "C             C",
+                                "C             C", " C           C ", " C           C ", " C           C ",
+                                "  E         E  ", "   CCC   CCC   ", "      CCC      " },
+                            { "     CCDCC     ", "   CC     CC   ", "  E         E  ", " C           C ",
+                                " C           C ", "C             C", "C      F      C", "D     FFF     D",
+                                "C      F      C", "C             C", " C           C ", " C           C ",
+                                "  E         E  ", "   CC     CC   ", "     CCDCC     " },
+                            { "     CD~DC     ", "   CC     CC   ", "  E         E  ", " C           C ",
+                                " C           C ", "C             C", "D     FFF     D", "D     FGF     D",
+                                "D     FFF     D", "C             C", " C           C ", " C           C ",
+                                "  E         E  ", "   CC     CC   ", "     CDDDC     " },
+                            { "     CCDCC     ", "   CC     CC   ", "  E         E  ", " C           C ",
+                                " C           C ", "C             C", "C      F      C", "D     FFF     D",
+                                "C      F      C", "C             C", " C           C ", " C           C ",
+                                "  E         E  ", "   CC     CC   ", "     CCDCC     " },
+                            { "      CCC      ", "   CCC   CCC   ", "  E         E  ", " C           C ",
+                                " C           C ", " C           C ", "C             C", "C             C",
+                                "C             C", " C           C ", " C           C ", " C           C ",
+                                "  E         E  ", "   CCC   CCC   ", "      CCC      " },
+                            { "               ", "    CCCCCCC    ", "   E       E   ", "  E         E  ",
+                                " C           C ", " C           C ", " C           C ", " C           C ",
+                                " C           C ", " C           C ", " C           C ", "  E         E  ",
+                                "   E       E   ", "    CCCCCCC    ", "               " },
+                            { "               ", "     CCCCC     ", "    E     E    ", "   E       E   ",
+                                "  E         E  ", " C           C ", " C           C ", " C           C ",
+                                " C           C ", " C           C ", "  E         E  ", "   E       E   ",
+                                "    E     E    ", "     CCCCC     ", "               " },
+                            { "               ", "               ", "     EEEEE     ", "    E     E    ",
+                                "   E       E   ", "  E         E  ", "  E         E  ", "  E         E  ",
+                                "  E         E  ", "  E         E  ", "   E       E   ", "    E     E    ",
+                                "     EEEEE     ", "               ", "               " },
+                            { "               ", "               ", "               ", "     CCCCC     ",
+                                "    CCCCCCC    ", "   CCC   CCC   ", "   CC     CC   ", "   CC     CC   ",
+                                "   CC     CC   ", "   CCC   CCC   ", "    CCCCCCC    ", "     CCCCC     ",
+                                "               ", "               ", "               " },
+                            { "               ", "               ", "               ", "               ",
+                                "               ", "      CCC      ", "     CCDCC     ", "     CDDDC     ",
+                                "     CCDCC     ", "      CCC      ", "               ", "               ",
+                                "               ", "               ", "               " } }))
                 .addElement(
                     'C',
                     ofChain(
@@ -325,10 +366,7 @@ public class MTEShockwaveEnergyEnhancer extends MTEExtendedPowerMultiBlockBase<M
                             .casingIndex(getHatchTextureId())
                             .hint(1)
                             .build(),
-                        onElementPass(
-                            m -> m.mCasing++,
-                            ofBlock(Blocks.BlockCasings, 1)
-                        )))
+                        onElementPass(m -> m.mCasing++, ofBlock(Blocks.BlockCasings, 1))))
                 .addElement('D', ofBlock(Blocks.BlockCasings, 2))
                 .addElement('E', ofBlock(Blocks.BlockCasings, 3))
                 .addElement('F', ofBlock(Blocks.BlockCasings, 5))
@@ -380,54 +418,67 @@ public class MTEShockwaveEnergyEnhancer extends MTEExtendedPowerMultiBlockBase<M
             .addSupportAny()
             .beginStructureBlock(15, 15, 15, false)
             .addController(
-                StatCollector.translateToLocal("gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.controller"))
+                StatCollector
+                    .translateToLocal("gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.controller"))
             .addCasing(
                 "300+",
-                StatCollector.translateToLocal("gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.casing.shockwave"),
+                StatCollector
+                    .translateToLocal("gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.casing.shockwave"),
                 false)
             .addCasing(
                 "29",
-                StatCollector.translateToLocal("gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.casing.coil"),
+                StatCollector
+                    .translateToLocal("gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.casing.coil"),
                 false)
             .addCasing(
                 "116",
-                StatCollector.translateToLocal("gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.casing.oblique"),
+                StatCollector
+                    .translateToLocal("gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.casing.oblique"),
                 false)
             .addCasing(
                 "18",
-                StatCollector.translateToLocal("gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.casing.explosive"),
+                StatCollector
+                    .translateToLocal("gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.casing.explosive"),
                 false)
             .addCasing(
                 "1",
-                StatCollector.translateToLocal("gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.casing.plasma"),
+                StatCollector
+                    .translateToLocal("gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.casing.plasma"),
                 false)
             .addEnergyHatch(
                 "1+",
-                StatCollector.translateToLocal("gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.hatch_position"),
+                StatCollector
+                    .translateToLocal("gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.hatch_position"),
                 1)
             .addMaintenanceHatch(
                 "1+",
-                StatCollector.translateToLocal("gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.hatch_position"),
+                StatCollector
+                    .translateToLocal("gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.hatch_position"),
                 1)
             .addInputBus(
                 "1+",
-                StatCollector.translateToLocal("gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.hatch_position"),
+                StatCollector
+                    .translateToLocal("gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.hatch_position"),
                 1)
             .addInputHatch(
                 "1+",
-                StatCollector.translateToLocal("gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.hatch_position"),
+                StatCollector
+                    .translateToLocal("gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.hatch_position"),
                 1)
             .addOutputBus(
                 "1+",
-                StatCollector.translateToLocal("gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.hatch_position"),
+                StatCollector
+                    .translateToLocal("gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.hatch_position"),
                 1)
             .addOutputHatch(
                 "1+",
-                StatCollector.translateToLocal("gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.hatch_position"),
+                StatCollector
+                    .translateToLocal("gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.hatch_position"),
                 1)
             .addMufflerHatch(
                 "1+",
-                StatCollector.translateToLocal("gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.hatch_position"),
+                StatCollector
+                    .translateToLocal("gtnewhardness.multiblock.MTEShockwaveEnergyEnhancer.structure.hatch_position"),
                 1)
             .toolTipFinisher();
         return tt;
@@ -436,8 +487,7 @@ public class MTEShockwaveEnergyEnhancer extends MTEExtendedPowerMultiBlockBase<M
     @Override
     public void checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack, List<StructureError> errors) {
         mCasing = 0;
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET, errors))
-            return;
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET, errors)) return;
 
         checkCasingMin(errors, mCasing, 300);
         checkHasAnyEnergy(errors);
@@ -453,38 +503,29 @@ public class MTEShockwaveEnergyEnhancer extends MTEExtendedPowerMultiBlockBase<M
     }
 
     public void updateHatchTexture() {
-        for (IDualInputHatch h : mDualInputHatches)
-            h.updateTexture(getHatchTextureId());
-        for (MTEHatch h : mInputHatches)
-            h.updateTexture(getHatchTextureId());
-        for (MTEHatch h : mInputBusses)
-            h.updateTexture(getHatchTextureId());
-        for (MTEHatch h: mOutputHatches)
-            h.updateTexture(getHatchTextureId());
-        for (MTEHatch h : mOutputBusses)
-            h.updateTexture(getHatchTextureId());
-        for (MTEHatch h : mMaintenanceHatches)
-            h.updateTexture(getHatchTextureId());
-        for (MTEHatch h : mEnergyHatches)
-            h.updateTexture(getHatchTextureId());
-        for (MTEHatch h : mExoticEnergyHatches)
-            h.updateTexture(getHatchTextureId());
-        for (MTEHatch h : mMufflerHatches)
-            h.updateTexture(getHatchTextureId());
+        for (IDualInputHatch h : mDualInputHatches) h.updateTexture(getHatchTextureId());
+        for (MTEHatch h : mInputHatches) h.updateTexture(getHatchTextureId());
+        for (MTEHatch h : mInputBusses) h.updateTexture(getHatchTextureId());
+        for (MTEHatch h : mOutputHatches) h.updateTexture(getHatchTextureId());
+        for (MTEHatch h : mOutputBusses) h.updateTexture(getHatchTextureId());
+        for (MTEHatch h : mMaintenanceHatches) h.updateTexture(getHatchTextureId());
+        for (MTEHatch h : mEnergyHatches) h.updateTexture(getHatchTextureId());
+        for (MTEHatch h : mExoticEnergyHatches) h.updateTexture(getHatchTextureId());
+        for (MTEHatch h : mMufflerHatches) h.updateTexture(getHatchTextureId());
     }
 
     @Override
     public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, ForgeDirection side, ForgeDirection aFacing,
-            int colorIndex, boolean aActive, boolean redstoneLevel) {
+        int colorIndex, boolean aActive, boolean redstoneLevel) {
         return Textures.BlockIcons.createTextureWithCasing(
-                this,
-                side,
-                aFacing,
-                aActive,
-                OVERLAY_FRONT_SEE,
-                OVERLAY_FRONT_SEE_GLOW,
-                OVERLAY_FRONT_SEE_ACTIVE,
-                OVERLAY_FRONT_SEE_ACTIVE_GLOW);
+            this,
+            side,
+            aFacing,
+            aActive,
+            OVERLAY_FRONT_SEE,
+            OVERLAY_FRONT_SEE_GLOW,
+            OVERLAY_FRONT_SEE_ACTIVE,
+            OVERLAY_FRONT_SEE_ACTIVE_GLOW);
     }
 
     @Override

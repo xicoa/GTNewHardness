@@ -51,6 +51,7 @@ dependencies {
     implementation(gtnh("NewHorizonsCoreMod"))
     implementation(gtnh("Avaritia"))
     implementation(gtnh("Avaritiaddons"))
+    implementation(gtnh("CarpentersBlocks"))
     implementation(gtnh("Eternal-Singularity"))
     implementation(gtnh("Universal-Singularities"))
     implementation(gtnh("MagicBees"))

@@ -2,8 +2,8 @@ package com.xicoa.gtnewhardness.loaders;
 
 import com.xicoa.gtnewhardness.GTNewHardness;
 import com.xicoa.gtnewhardness.client.iconContainers.blocks.NHBlockIconContainer;
-import com.xicoa.gtnewhardness.common.blocks.BlocksRegister;
 import com.xicoa.gtnewhardness.common.blocks.BlockCasings;
+import com.xicoa.gtnewhardness.common.blocks.BlocksRegister;
 
 import gregtech.api.util.GTUtility;
 
