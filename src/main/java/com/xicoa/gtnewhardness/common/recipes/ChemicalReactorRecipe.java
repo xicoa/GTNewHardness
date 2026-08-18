@@ -1,6 +1,5 @@
 package com.xicoa.gtnewhardness.common.recipes;
 
-import static gregtech.api.enums.Mods.EtFuturumRequiem;
 import static gregtech.api.recipe.RecipeMaps.chemicalReactorRecipes;
 import static gregtech.api.recipe.RecipeMaps.multiblockChemicalReactorRecipes;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
@@ -10,7 +9,6 @@ import com.xicoa.gtnewhardness.common.enums.Materials;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
-import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
 
 public class ChemicalReactorRecipe {
@@ -23,7 +21,7 @@ public class ChemicalReactorRecipe {
 
         GTValues.RA.stdBuilder()
             .itemInputs(
-                GTModHandler.getModItem(EtFuturumRequiem.ID, "prismarine_shard", 1, 0),
+                GTOreDictUnificator.get("shardPrismarine", 1L),
                 GTOreDictUnificator.get(OrePrefixes.cell, gregtech.api.enums.Materials.Grade1PurifiedWater, 1L))
             .itemOutputs(gregtech.api.enums.Materials.Empty.getCells(1))
             .fluidInputs(Materials.mixedAcidicPlasma.getPlasma(100))
@@ -33,7 +31,7 @@ public class ChemicalReactorRecipe {
             .addTo(chemicalReactorRecipes);
 
         GTValues.RA.stdBuilder()
-            .itemInputs(GTModHandler.getModItem(EtFuturumRequiem.ID, "prismarine_shard", 1, 0))
+            .itemInputs(GTOreDictUnificator.get("shardPrismarine", 1L))
             .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, gregtech.api.enums.Materials.Ash, 1))
             .fluidInputs(
                 Materials.mixedAcidicPlasma.getPlasma(100),
@@ -45,7 +43,7 @@ public class ChemicalReactorRecipe {
             .addTo(multiblockChemicalReactorRecipes);
 
         GTValues.RA.stdBuilder()
-            .itemInputs(GTModHandler.getModItem(EtFuturumRequiem.ID, "prismarine_shard", 10, 0))
+            .itemInputs(GTOreDictUnificator.get("shardPrismarine", 10L))
             .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, gregtech.api.enums.Materials.Ash, 1))
             .fluidInputs(
                 Materials.mixedAcidicPlasma.getPlasma(200),
@@ -58,7 +56,7 @@ public class ChemicalReactorRecipe {
             .addTo(multiblockChemicalReactorRecipes);
 
         GTValues.RA.stdBuilder()
-            .itemInputs(GTModHandler.getModItem(EtFuturumRequiem.ID, "prismarine_shard", 100, 0))
+            .itemInputs(GTOreDictUnificator.get("shardPrismarine", 100L))
             .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, gregtech.api.enums.Materials.Ash, 1))
             .fluidInputs(
                 Materials.mixedAcidicPlasma.getPlasma(400),

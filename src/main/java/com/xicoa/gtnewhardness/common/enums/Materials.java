@@ -1,7 +1,5 @@
 package com.xicoa.gtnewhardness.common.enums;
 
-import static gregtech.api.enums.Materials.*;
-
 public class Materials {
 
     public static gregtech.api.enums.Materials electronPlasma;
